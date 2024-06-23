@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.activity.ComponentActivity
+import androidx.activity.enableEdgeToEdge
 
 class MainActivity : ComponentActivity() {
 
@@ -16,6 +17,7 @@ class MainActivity : ComponentActivity() {
     private lateinit var mediaPlayer: MediaPlayer
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
