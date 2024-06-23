@@ -18,5 +18,15 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_marginTop="20dp"
-        android:text="Start Animation" />
+        android:text="Begin" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/button"
+        android:layout_margin="16dp"
+        android:background="@android:color/white"
+        android:hint="What's weighing on you right now?"
+        android:inputType="text" />
 </RelativeLayout>

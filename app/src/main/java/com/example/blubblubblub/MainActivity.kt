@@ -3,13 +3,15 @@ package com.example.blubblubblub
 import android.graphics.drawable.AnimationDrawable
 import android.media.MediaPlayer
 import android.os.Bundle
-import android.view.ViewGroup
+import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import androidx.activity.ComponentActivity
 
 class MainActivity : ComponentActivity() {
 
+    private lateinit var editText: EditText
     private lateinit var animationDrawable: AnimationDrawable
     private lateinit var mediaPlayer: MediaPlayer
 
@@ -23,9 +25,12 @@ class MainActivity : ComponentActivity() {
 
         mediaPlayer = MediaPlayer.create(this, R.raw.brook)
 
+        editText = findViewById(R.id.editText)
+
         val button: Button = findViewById(R.id.button)
         button.setOnClickListener {
-            (button.parent as? ViewGroup)?.removeView(button)
+            button.visibility = View.GONE
+            editText.visibility = View.GONE
             mediaPlayer.start()
             animationDrawable.start()
         }
