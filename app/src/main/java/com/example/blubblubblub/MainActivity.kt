@@ -1,5 +1,8 @@
 package com.example.blubblubblub
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.ObjectAnimator
 import android.graphics.drawable.AnimationDrawable
 import android.media.MediaPlayer
 import android.os.Bundle
@@ -14,38 +17,82 @@ import androidx.activity.enableEdgeToEdge
 class MainActivity : ComponentActivity() {
 
     private lateinit var editText: EditText
-    private lateinit var button: Button
-    private lateinit var animationDrawable: AnimationDrawable
+    private lateinit var startButton: Button
+    private lateinit var stopButton: Button
+    private lateinit var frameAnimation: AnimationDrawable
+    private lateinit var newAnimation: AnimationDrawable
     private lateinit var mediaPlayer: MediaPlayer
     private lateinit var chime: MediaPlayer
+    private lateinit var imageView: ImageView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val imageView: ImageView = findViewById(R.id.imageView)
+        imageView= findViewById(R.id.imageView)
         imageView.setBackgroundResource(R.drawable.frame_animation)
-        animationDrawable = imageView.background as AnimationDrawable
+        frameAnimation = imageView.background as AnimationDrawable
 
         mediaPlayer = MediaPlayer.create(this, R.raw.brook)
         chime = MediaPlayer.create(this, R.raw.chime)
 
         editText = findViewById(R.id.editText)
 
-        button = findViewById(R.id.button)
-        button.setOnClickListener {
+        startButton = findViewById(R.id.startButton)
+        stopButton = findViewById(R.id.stopButton)
+        stopButton.visibility = View.GONE
+
+
+        startButton.setOnClickListener {
             clearAndStartAnimation()
+            stopButton.visibility = View.VISIBLE
         }
+
+        stopButton.setOnClickListener {
+            stopButton.visibility = View.GONE
+            handleStopButtonPressed()
+        }
+
+    }
+
+    private fun handleStopButtonPressed() {
+        fadeOutAndTransition()
+    }
+
+    private fun fadeOutAndTransition() {
+        val fadeOut = ObjectAnimator.ofFloat(imageView, "alpha", 1f, 0f)
+        fadeOut.duration = 300 // 0.3 seconds
+        fadeOut.addListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: Animator) {
+                frameAnimation.stop()
+                startNewAnimation()
+                fadeIn()
+            }
+        })
+        fadeOut.start()
+    }
+
+    private fun startNewAnimation() {
+        imageView.setBackgroundResource(R.drawable.let_it_go_animation)
+        newAnimation = imageView.background as AnimationDrawable
+        newAnimation.start()
+    }
+
+    private fun fadeIn() {
+        val fadeIn = ObjectAnimator.ofFloat(imageView, "alpha", 0f, 1f)
+        fadeIn.duration = 300 // 0.3 seconds
+        fadeIn.start()
     }
 
     private fun clearAndStartAnimation() {
-        button.visibility = View.GONE
+        startButton.visibility = View.GONE
         editText.visibility = View.GONE
         hideKeyboard()
         chime.start()
         mediaPlayer.start()
-        animationDrawable.start()
+        frameAnimation.start()
     }
 
     private fun hideKeyboard() {

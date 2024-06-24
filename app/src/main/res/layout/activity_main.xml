@@ -12,7 +12,7 @@
         android:scaleType="centerCrop"/>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/startButton"
         android:textColor="@color/white"
         android:background="@color/purple_200"
         android:layout_width="wrap_content"
@@ -22,11 +22,23 @@
         android:layout_marginTop="20dp"
         android:text="Begin" />
 
+    <Button
+        android:id="@+id/stopButton"
+        android:textColor="@color/white"
+        android:background="@color/purple_200"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_alignBottom="@id/imageView"
+        android:layout_marginBottom="150dp"
+        android:text="Let it go" />
+
     <EditText
         android:id="@+id/editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/button"
+        android:layout_above="@id/startButton"
         android:layout_margin="16dp"
         android:background="@android:color/white"
         android:padding="100px"

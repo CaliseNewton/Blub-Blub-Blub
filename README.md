@@ -1,1 +1,1 @@
-early development (initial first draft) of an andriod app. more to come!
+early development (initial first draft) of an android app. more to come!
