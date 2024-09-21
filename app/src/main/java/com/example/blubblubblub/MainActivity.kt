@@ -25,7 +25,6 @@ class MainActivity : ComponentActivity() {
     private lateinit var chime: MediaPlayer
     private lateinit var imageView: ImageView
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
@@ -58,10 +57,6 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun handleStopButtonPressed() {
-        fadeOutAndTransition()
-    }
-
-    private fun fadeOutAndTransition() {
         val fadeOut = ObjectAnimator.ofFloat(imageView, "alpha", 1f, 0f)
         fadeOut.duration = 300 // 0.3 seconds
         fadeOut.addListener(object : AnimatorListenerAdapter() {
